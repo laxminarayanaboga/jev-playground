@@ -19,7 +19,7 @@ Needs Node.js 22+ and a TypeSafe API key ([console.typesafe.ai](https://console.
 
 ```sh
 npm install
-npm run setup            # installs Chromium for Playwright and clones 2048 into vendor/
+npm run setup            # installs Chromium for Playwright and clones 2048 (pinned commit) into vendor/
 cp .env.example .env     # then put your TYPESAFE_API_KEY in .env
 ```
 

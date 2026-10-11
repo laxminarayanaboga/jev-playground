@@ -9,7 +9,7 @@
     "check": "tsc --noEmit",
     "test": "tsx src/games/2048/board.test.ts",
     "report:2048": "tsx src/games/2048/report.ts",
-    "setup": "playwright install chromium && (test -d vendor/2048 || git clone --depth 1 https://github.com/gabrielecirulli/2048.git vendor/2048)"
+    "setup": "playwright install chromium && (test -d vendor/2048 || (git clone -q https://github.com/gabrielecirulli/2048.git vendor/2048 && git -C vendor/2048 checkout -q 478b6ec346e3787f589e4af751378d06ded4cbbc))"
   },
   "type": "module",
   "dependencies": {
