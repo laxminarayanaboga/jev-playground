@@ -49,17 +49,44 @@ Last updated: 11 Oct 2026
   - Two execution bugs fixed along the way. A blocked jump (dino still in the air) was never retried; the plan is now carried out on every read until the obstacle passes. Ducking is now held until the obstacle it was for has passed, instead of depending on code's bird classification.
 
 - **Published:** public repo https://github.com/laxminarayanaboga/jev-playground (`main`). `vendor/`, `runs/` and `.env` are gitignored; `npm run setup` clones 2048. Repo-local git identity is set, because the global `user.name`/`user.email` contain literal curly quotes.
-- **Blog:** new "AI Experiments" series in `laxminarayanaboga.github.io`. Parts 1 (2048) and 2 (dino) are merged and live (PR #45). Part 3 (plain code vs Jev vs Claude Code), plus the final baseline score in part 2, is in PR #46 waiting for review. Publish to Medium via Import a story with `https://laxminarayanaboga.github.io/articles/medium/<slug>.html`.
+- **Blog:** new "AI Experiments" series in `laxminarayanaboga.github.io`. Parts 1 (2048) and 2 (dino) are merged and live (PR #45). Part 3 (plain code vs Jev vs Claude Code) and the final baseline score in part 2 are merged and live (PR #46). On Medium, tables don't import: the user pasted a screenshot of the part 3 table. Publish to Medium via Import a story with `https://laxminarayanaboga.github.io/articles/medium/<slug>.html`.
 
 ## In progress
 
-- Nothing.
+- Nothing. The 2048 and dino work is finished and written up (blog parts 1–3 are live, PR #46 merged).
 
 ## Next
 
-1. Hedge `jev-plan` against tail latency: send 2 requests per obstacle and use the first answer. Cost doubles, which is still about $0.07 per 25 minutes. Or fall back to the `if` rule when no answer has arrived, but that hands the decision to code.
-2. Plan experiment: rawer descriptions (for example the bird's height in px instead of "mid-height bird") to see where Jev starts failing. This deliberately breaks CLAUDE.md rule 2 as a test.
-3. No git until the user says so.
+**When the user says "resume" or "next step", start here.** Show this list, recommend, and wait for a pick before coding. Plan first (CLAUDE.md), because each of these is several files.
+
+### Recommended: A. Product feedback triage (Jev's home turf)
+
+The games mostly showed that Jev is a judgment step code should feed facts to. Feedback text is where judgment is the *whole* job and no 3-line `if` can win, so it's the most useful thing to learn next. This is the "work-shaped use" from PLAN.md §4.
+
+- **Data:** a public, labelled review set where star ratings act as ground truth for satisfaction (for example an Amazon or app-store reviews sample, a few hundred rows saved as JSON/CSV under `data/`, gitignored if the licence needs it). Ask the user which dataset before downloading anything.
+- **Questions (one request per review, all in parallel):**
+  - `score` satisfaction, 5 described levels → compare with stars (exact match, off-by-one, correlation).
+  - `choice` overall sentiment: positive / negative / mixed / neutral.
+  - one `noul` per topic: bug report, feature request, pricing, support, usability. Several can be true at once, which is why these are nouls and not one choice.
+  - `noul` "needs a reply from a person" (urgent, angry, churn risk).
+- **Baseline:** a keyword/lexicon rule (no new dependencies without asking). Report Jev against it, like every game.
+- **What to learn:** calibration (are 0.9 answers right 90% of the time?), first-option bias on the sentiment choice (shuffle), sarcasm and mixed reviews, cost per 1,000 reviews, and confidence gating (send low-confidence rows to a person).
+- **Output:** a small report table + a few examples where Jev and the stars disagree. Probably blog part 4.
+
+### B. One more game, but one that needs judgment
+
+The lesson from 2048 and dino: search games belong to code, reflex games belong to code. Pick a game where the hard part is fuzzy:
+- a text adventure or "choose the reply" game, where options are described in words;
+- Codenames-style clue matching (which words relate to a clue), a semantic judgment code can't fake easily.
+Avoid more timing games (Flappy, etc.): same lesson as dino.
+
+### C. Small dino/2048 follow-ups (only if wanted)
+
+1. Hedge `jev-plan` against tail latency: send 2 requests per obstacle and use the first answer (about $0.07 per 25 minutes). Or fall back to the `if` rule when no answer has arrived.
+2. Rawer descriptions (bird height in px instead of "mid-height bird") to see where Jev starts failing. Deliberately breaks CLAUDE.md rule 2, as a test.
+3. Confidence gating on 2048: heuristic when Jev's top two scores are close. Does the mix beat both?
+
+Git: repo is public; commit and push finished steps to `main` when the user asks (they have asked before for wrap-ups).
 
 ## Measurements
 
