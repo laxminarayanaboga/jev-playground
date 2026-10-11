@@ -1,0 +1,28 @@
+{
+  "name": "jev-playground",
+  "version": "1.0.0",
+  "description": "Make TypeSafe Jev play browser games via Playwright (learning project)",
+  "scripts": {
+    "2048": "tsx --env-file-if-exists=.env src/games/2048/play.ts",
+    "hello": "tsx --env-file-if-exists=.env src/hello.ts",
+    "dino": "tsx --env-file-if-exists=.env src/games/dino/play.ts",
+    "check": "tsc --noEmit",
+    "test": "tsx src/games/2048/board.test.ts",
+    "report:2048": "tsx src/games/2048/report.ts",
+    "setup": "playwright install chromium && (test -d vendor/2048 || git clone --depth 1 https://github.com/gabrielecirulli/2048.git vendor/2048)"
+  },
+  "type": "module",
+  "dependencies": {
+    "@typesafe-ai/sdk": "^0.6.0",
+    "playwright": "^1.64.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}
