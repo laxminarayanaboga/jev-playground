@@ -9,7 +9,7 @@ Jev is a decision model, not a chat model: you send it a small **state** and typ
 | Game | Players | Headline |
 |---|---|---|
 | **2048** (the original open-source game, run locally) | random, heuristic, expectimax, Jev A (Score per move), Jev B (one Choice) | Given the same facts, Jev matches a hand-written heuristic. Given lookahead facts, Jev A beats it (7/10 games reached 512 vs 3/10). Expectimax search wins by far (median 2048). |
-| **Chrome dino** (`chrome://dino`) | `if` bot, Jev with timing buckets, Jev planning each obstacle ahead | Asking Jev "jump *now*?" fails: latency varies ~120 ms, the jump window is ~90 ms. Asking "what to do when this obstacle arrives?" as soon as it appears works: 1,998/1,998 correct decisions, a run of 29,787 in 26 minutes, for $0.035. |
+| **Chrome dino** (`chrome://dino`) | `if` bot, Jev with timing buckets, Jev planning each obstacle ahead | Asking Jev "jump *now*?" fails: latency varies ~120 ms, the jump window is ~90 ms. Asking "what to do when this obstacle arrives?" as soon as it appears works: 1,998/1,998 correct decisions, a run of 29,787 in 26 minutes, for $0.035. The three-line `if` bot still wins: 169,369 in 2 h 25 min. |
 
 Full numbers, every bug found along the way, and open questions are in [`STATUS.md`](STATUS.md). The Jev API notes and limits are in [`JEV_NOTES.md`](JEV_NOTES.md), and the order of work in [`PLAN.md`](PLAN.md).
 

@@ -49,11 +49,11 @@ Last updated: 11 Oct 2026
   - Two execution bugs fixed along the way. A blocked jump (dino still in the air) was never retried; the plan is now carried out on every read until the obstacle passes. Ducking is now held until the obstacle it was for has passed, instead of depending on code's bird classification.
 
 - **Published:** public repo https://github.com/laxminarayanaboga/jev-playground (`main`). `vendor/`, `runs/` and `.env` are gitignored; `npm run setup` clones 2048. Repo-local git identity is set, because the global `user.name`/`user.email` contain literal curly quotes.
-- **Blog drafts** in `laxminarayanaboga.github.io` on branch `article-jev-games` (uncommitted): new series "AI Experiments" (`ai-1-decision-model-plays-2048.md`, `ai-2-latency-is-a-design-constraint-chrome-dino.md`), built to site and Medium HTML.
+- **Blog:** new "AI Experiments" series in `laxminarayanaboga.github.io`. Parts 1 (2048) and 2 (dino) are merged and live (PR #45). Part 3 (plain code vs Jev vs Claude Code), plus the final baseline score in part 2, is in PR #46 waiting for review. Publish to Medium via Import a story with `https://laxminarayanaboga.github.io/articles/medium/<slug>.html`.
 
 ## In progress
 
-- Nothing running except the `if` bot baseline from the first diagnostic run, left going at the user's request (97,000+ after 83 minutes, still at top speed).
+- Nothing.
 
 ## Next
 
@@ -94,7 +94,7 @@ Agreement on the boards Jev faced (first run): jev-a matches the heuristic on 72
 
 | Player | Runs | Scores | Requests | Cost | Latency p50 / p95 | Notes |
 |---|---|---|---|---|---|---|
-| `if` bot | 2 (+1 killed) | 700; 56,778+ still alive after 49 min | - | - | - | The earlier run 2 was also past 10,000 when I killed it |
+| `if` bot | 2 (+1 killed) | 700; **169,369** (2 h 25 min, crashed on a large cactus at top speed, ~24M state reads) | - | - | - | The earlier run 2 was also past 10,000 when I killed it |
 | `jev` (bucket timing) | 2 | 102, 51 | 118 + 21 | $0.003 | 224 / 301 ms | Jev was right on every answer; the timing failed |
 | **`jev-plan`** | 4 | 462*, 712*, 4,336, **29,787 (alive at the 2000-request cap, 26 min)** | 2000 | $0.035 | 242 / 361 ms (p99 474, max 605) | 1,998/1,998 plans correct; *before the bug fixes |
 
