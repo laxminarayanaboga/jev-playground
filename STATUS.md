@@ -48,9 +48,12 @@ Last updated: 11 Oct 2026
   - **`jev-plan`**: one Jev request per obstacle as soon as it appears on screen ("jump, duck or keep running when it reaches you?"). Code carries out the plan at the same 150 ms lead as the `if` bot. Obstacles are tracked by an ID stamped on the game's obstacle objects (`__id`). Matching by due time lost track of an obstacle once and caused a crash.
   - Two execution bugs fixed along the way. A blocked jump (dino still in the air) was never retried; the plan is now carried out on every read until the obstacle passes. Ducking is now held until the obstacle it was for has passed, instead of depending on code's bird classification.
 
+- **Published:** public repo https://github.com/laxminarayanaboga/jev-playground (`main`). `vendor/`, `runs/` and `.env` are gitignored; `npm run setup` clones 2048. Repo-local git identity is set, because the global `user.name`/`user.email` contain literal curly quotes.
+- **Blog drafts** in `laxminarayanaboga.github.io` on branch `article-jev-games` (uncommitted): new series "AI Experiments" (`ai-1-decision-model-plays-2048.md`, `ai-2-latency-is-a-design-constraint-chrome-dino.md`), built to site and Medium HTML.
+
 ## In progress
 
-- Nothing running except the `if` bot baseline from the first diagnostic run, left going at the user's request (56,778 after 49 minutes, still at top speed).
+- Nothing running except the `if` bot baseline from the first diagnostic run, left going at the user's request (97,000+ after 83 minutes, still at top speed).
 
 ## Next
 
